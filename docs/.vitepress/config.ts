@@ -4,8 +4,8 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
-  // 对于个人GitHub Pages站点，base路径应为'/'
-  base: '/',
+  // 对于项目站点，base路径应为仓库名称
+  base: '/yutongElement.github.io/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
