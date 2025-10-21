@@ -1,10 +1,10 @@
 name: Deploy VitePress Site to GitHub Pages
 
 on:
-  # 当推送到main分支时触发部署
+  # 当推送到master分支时触发部署
   push:
     branches:
-      - main
+      - master
   # 允许手动触发部署
   workflow_dispatch:
 
