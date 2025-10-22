@@ -21,7 +21,7 @@ import { ref, watch, reactive } from 'vue'
 import { createPopper } from '@popperjs/core'
 import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import useClickOuterside from '../../hooks/useClickOutside'
-
+import { debounce } from 'lodash-es'
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',
   trigger: 'hover',
@@ -55,7 +55,6 @@ defineOptions({
   name: 'VKTooltip'
 })
 
-
 const open = () => {
   isOpen.value = true
   emits('visible-change', true)
@@ -64,13 +63,28 @@ const close = () => {
   isOpen.value = false
   emits('visible-change', false)
 }
+
+const openDebounce = debounce(open, props.openDelay || 0)
+const closeDebounce = debounce(close, props.closeDelay || 0)
+
+const openFinal = () => {
+  closeDebounce.cancel()
+  openDebounce()
+}
+const closeFinal = () => {
+  openDebounce.cancel()
+  closeDebounce()
+}
 const togglePopper = () => {
-  isOpen.value = !isOpen.value
-  emits('visible-change', isOpen.value)
+  if (isOpen.value) {
+    closeFinal()
+  } else {
+    openFinal()
+  }
 }
 useClickOuterside(popperContainerNode, () => {
   if (props.trigger === 'click' && isOpen.value && !props.manual) {
-    close()
+    closeFinal()
   }
 })
 // v-on绑定events对象，实现动态绑定事件
@@ -78,8 +92,8 @@ useClickOuterside(popperContainerNode, () => {
 // events: { click: [Function: togglePopper] }
 const attachEvents = () => {
   if (props.trigger === 'hover') {
-    events['mouseenter'] = open
-    outerEvents['mouseleave'] = close
+    events['mouseenter'] = openFinal
+    outerEvents['mouseleave'] = closeFinal
   } else if (props.trigger === 'click') {
     events['click'] = togglePopper
   }
@@ -116,7 +130,7 @@ onUnmounted(() => {
   popperInstance?.destroy()
 })
 defineExpose<TooltipInstance>({
-  'show': open,
-  'hide': close
+  'show': openFinal,
+  'hide': closeFinal
 })
 </script>

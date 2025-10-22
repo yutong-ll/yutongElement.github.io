@@ -12,8 +12,8 @@ import { onMounted, reactive, ref } from 'vue'
 import type { Options } from '@popperjs/core'
 const buttonRef = ref<ButtonInstance | null>(null)
 const tooltipRef = ref<TooltipInstance | null>(null)
-const trigger = ref<any>('click')
-const isManual = ref(true)
+const trigger = ref<any>('hover')
+const isManual = ref(false)
 const options = reactive<Partial<Options>>({
   placement: 'top',
   strategy: 'fixed',
@@ -35,7 +35,8 @@ const closeTooltip = () => {
 
 <template>
   <header>
-    <VKTooltip :trigger="trigger" content="这是个提示" :manual="isManual" ref="tooltipRef" :popper-options="options">
+    <VKTooltip :trigger="trigger" content="这是个提示" :manual="isManual" ref="tooltipRef" :popper-options="options"
+      :open-delay="500" :close-delay="500">
       <img alt="Vue logo" class="logo" src="/assets/logo.svg" width="125" height="125" />
       <!-- <template #content>
         <div>
