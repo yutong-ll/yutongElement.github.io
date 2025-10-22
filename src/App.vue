@@ -8,11 +8,16 @@ import VKCollapse from './components/Collapse/Collapse_.vue'
 import VKCollapseItem from './components/Collapse/Collapse_Item.vue'
 import Icon from './components/Icon/Icon.vue'
 import type { TooltipInstance } from './components/Tooltip/types'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import type { Options } from '@popperjs/core'
 const buttonRef = ref<ButtonInstance | null>(null)
 const tooltipRef = ref<TooltipInstance | null>(null)
 const trigger = ref<any>('click')
 const isManual = ref(true)
+const options = reactive<Partial<Options>>({
+  placement: 'right-end',
+  strategy: 'fixed'
+})
 onMounted(() => {
   console.log("onMounted")
   if (buttonRef.value) {
@@ -30,13 +35,13 @@ const closeTooltip = () => {
 
 <template>
   <header>
-    <VKTooltip placement="top" :trigger="trigger" :manual="isManual" ref="tooltipRef">
+    <VKTooltip :trigger="trigger" content="这是个提示" :manual="isManual" ref="tooltipRef" :popper-options="options">
       <img alt="Vue logo" class="logo" src="/assets/logo.svg" width="125" height="125" />
-      <template #content>
+      <!-- <template #content>
         <div>
           这是个提示
         </div>
-      </template>
+      </template> -->
     </VKTooltip>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />

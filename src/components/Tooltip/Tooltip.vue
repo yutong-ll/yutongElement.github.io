@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onUnmounted, defineOptions } from 'vue'
+import { defineProps, onUnmounted, defineOptions, computed } from 'vue'
 import type { Instance } from '@popperjs/core'
 import { ref, watch, reactive } from 'vue'
 import { createPopper } from '@popperjs/core'
@@ -20,7 +20,7 @@ import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import useClickOuterside from '../../hooks/useClickOutside'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
-  placement: 'bottom',
+  placement: 'top',
   trigger: 'hover',
 })
 
@@ -32,7 +32,12 @@ const popperContainerNode = ref<HTMLDivElement>()
 let popperInstance: null | Instance = null
 let events: Record<string, any> = reactive({})
 let outerEvents: Record<string, any> = reactive({})
-
+const PopperOptions = computed(() => {
+  return {
+    placement: props.placement,
+    ...props.popperOptions
+  }
+})
 defineOptions({
   name: 'VKTooltip'
 })
@@ -55,6 +60,9 @@ useClickOuterside(popperContainerNode, () => {
     close()
   }
 })
+// v-on绑定events对象，实现动态绑定事件
+// events: { mouseenter: [Function: open] }
+// events: { click: [Function: togglePopper] }
 const attachEvents = () => {
   if (props.trigger === 'hover') {
     events['mouseenter'] = open
@@ -63,8 +71,6 @@ const attachEvents = () => {
     events['click'] = togglePopper
   }
 }
-console.log('VKTooltip', props)
-console.log('VKTooltip', props.manual)
 if (!props.manual) {
   attachEvents()
 }
@@ -87,9 +93,7 @@ watch(() => props.trigger, (newTrigger, oldTrigger) => {
 watch(isOpen, (newValue) => {
   if (newValue) {
     if (triggerNode.value && popperNode.value) {
-      popperInstance = createPopper(triggerNode.value, popperNode.value, {
-        placement: props.placement
-      })
+      popperInstance = createPopper(triggerNode.value, popperNode.value, PopperOptions.value)
     } else {
       popperInstance?.destroy()
     }
