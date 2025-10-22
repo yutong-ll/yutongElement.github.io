@@ -6,6 +6,7 @@ export interface TooltipProps {
   placement?: Placement,
   manual?: boolean
   popperOptions?: Partial<Options>,
+  transition?: string,
 }
 
 export interface TooltipEmits {

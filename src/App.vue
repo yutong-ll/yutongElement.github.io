@@ -15,8 +15,8 @@ const tooltipRef = ref<TooltipInstance | null>(null)
 const trigger = ref<any>('click')
 const isManual = ref(true)
 const options = reactive<Partial<Options>>({
-  placement: 'right-end',
-  strategy: 'fixed'
+  placement: 'top',
+  strategy: 'fixed',
 })
 onMounted(() => {
   console.log("onMounted")

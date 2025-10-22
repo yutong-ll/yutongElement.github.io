@@ -3,11 +3,14 @@
     <div class="vk-tooltip__trigger" ref="triggerNode" v-on="events">
       <slot />
     </div>
-    <div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
-      <slot name="content">
-        {{ content }}
-      </slot>
-    </div>
+    <Transition :name="transition">
+      <div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
+        <slot name="content">
+          {{ content }}
+        </slot>
+        <div id="arrow" data-popper-arrow></div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ import useClickOuterside from '../../hooks/useClickOutside'
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',
   trigger: 'hover',
+  transition: 'fade',
 })
 
 const emits = defineEmits<TooltipEmits>()
@@ -35,6 +39,15 @@ let outerEvents: Record<string, any> = reactive({})
 const PopperOptions = computed(() => {
   return {
     placement: props.placement,
+    // popper的偏移量
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 9]
+        }
+      }
+    ],
     ...props.popperOptions
   }
 })
