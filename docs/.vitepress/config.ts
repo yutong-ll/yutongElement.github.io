@@ -1,11 +1,19 @@
 import { defineConfig } from 'vitepress'
-
+import { resolve } from 'path'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
   // 对于项目站点，base路径应为仓库名称
   base: '/yutongElement.github.io/',
+  vite: {
+    resolve: {
+      alias: {
+        // 设置别名，方便导入项目中的组件
+        '@': resolve(__dirname, '../../src')
+      }
+    }
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -25,6 +33,7 @@ export default defineConfig({
         text: 'Components',
         items: [
           { text: 'Button', link: '/components/button' },
+          { text: 'Tooltip', link: '/components/tooltip' },
         ]
       },
     ],
