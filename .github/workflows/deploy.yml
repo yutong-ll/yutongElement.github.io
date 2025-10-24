@@ -39,7 +39,7 @@ jobs:
 
       # 安装依赖
       - name: Install dependencies
-        run: npm ci
+        run: npm install  # 使用npm install代替npm ci以解决依赖同步问题
 
       # 构建VitePress站点
       - name: Build VitePress site
