@@ -1,71 +1,28 @@
-不需要：：demo。只把这个改成并列的介绍# Button 组件
+# Button 组件
 
 按钮用于触发一个操作，如提交表单、打开弹窗等。组件提供了丰富的类型、状态和交互效果，满足各类场景需求。
-
 
 ## 基础用法
 
 按钮的基础使用包含默认样式、主题类型和交互状态，通过简单属性即可快速配置。
 
-<script setup lang="ts">
-import Button from '@/components/Button/Button.vue'
-</script>
-
 ### 主题类型
 通过 `type` 属性指定按钮主题，支持五种预设类型，适配不同业务场景（如成功、警告、危险等操作）。
 
-<div class="demo-block">
-  <Button>默认按钮</Button>
-  <Button type="primary">主要按钮</Button>
-  <Button type="success">成功按钮</Button>
-  <Button type="info">信息按钮</Button>
-  <Button type="warning">警告按钮</Button>
-  <Button type="danger">危险按钮</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button>默认按钮</Button>
-  <Button type="primary">主要按钮</Button>
-  <Button type="success">成功按钮</Button>
-  <Button type="info">信息按钮</Button>
-  <Button type="warning">警告按钮</Button>
-  <Button type="danger">危险按钮</Button>
-</template>
+demo-preview=../demo/button/button-type.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ### 朴素按钮
 通过 `plain` 属性设置朴素风格，按钮仅保留边框和文字颜色，适合轻量化界面。
 
-<div class="demo-block">
-  <Button plain>朴素按钮</Button>
-  <Button type="primary" plain>主要朴素</Button>
-  <Button type="success" plain>成功朴素</Button>
-  <Button type="info" plain>信息朴素</Button>
-  <Button type="warning" plain>警告朴素</Button>
-  <Button type="danger" plain>危险朴素</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button plain>朴素按钮</Button>
-  <Button type="primary" plain>主要朴素</Button>
-  <Button type="success" plain>成功朴素</Button>
-  <Button type="info" plain>信息朴素</Button>
-  <Button type="warning" plain>警告朴素</Button>
-  <Button type="danger" plain>危险朴素</Button>
-</template>
+demo-preview=../demo/button/button-plain.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ## 形态与尺寸
 
@@ -75,50 +32,20 @@ import Button from '@/components/Button/Button.vue'
 - `round` 属性设置圆角按钮
 - `circle` 属性设置圆形按钮（建议配合图标或单字使用）
 
-<div class="demo-block">
-  <Button round>圆角按钮</Button>
-  <Button type="primary" round>圆角主要</Button>
-  <Button circle>✚</Button>
-  <Button type="success" circle>√</Button>
-  <Button type="danger" circle>✕</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button round>圆角按钮</Button>
-  <Button type="primary" round>圆角主要</Button>
-  <Button circle>✚</Button>
-  <Button type="success" circle>√</Button>
-  <Button type="danger" circle>✕</Button>
-</template>
+demo-preview=../demo/button/button-shape.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ### 尺寸控制
 通过 `size` 属性设置按钮尺寸，支持 `large`（大）、`default`（默认）、`small`（小）三种规格。
 
-<div class="demo-block">
-  <Button size="large">大型按钮</Button>
-  <Button>默认按钮</Button>
-  <Button size="small">小型按钮</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button size="large">大型按钮</Button>
-  <Button>默认按钮</Button>
-  <Button size="small">小型按钮</Button>
-</template>
+demo-preview=../demo/button/button-size.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ## 状态与交互
 
@@ -127,72 +54,29 @@ import Button from '@/components/Button/Button.vue'
 ### 禁用状态
 通过 `disabled` 属性禁用按钮，禁用状态下不响应点击事件。
 
-<div class="demo-block">
-  <Button disabled>禁用按钮</Button>
-  <Button type="primary" disabled>禁用主要</Button>
-  <Button type="success" plain disabled>禁用朴素</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button disabled>禁用按钮</Button>
-  <Button type="primary" disabled>禁用主要</Button>
-  <Button type="success" plain disabled>禁用朴素</Button>
-</template>
+demo-preview=../demo/button/button-disabled.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ### 加载状态
 通过 `loading` 属性显示加载状态，通常用于异步操作（如表单提交）时的状态提示。
 
-<div class="demo-block">
-  <Button loading>加载中</Button>
-  <Button type="primary" loading>加载中</Button>
-  <Button type="danger" size="small" loading>加载中</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button loading>加载中</Button>
-  <Button type="primary" loading>加载中</Button>
-  <Button type="danger" size="small" loading>加载中</Button>
-</template>
+demo-preview=../demo/button/button-loading.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ### 带图标按钮
 通过 `icon` 属性添加内置图标，增强视觉表达（需配合图标库使用）。
 
-<div class="demo-block">
-  <Button type="primary" icon="search">搜索</Button>
-  <Button icon="edit">编辑</Button>
-  <Button type="success" icon="check">确认</Button>
-  <Button type="warning" icon="exclamation-triangle">警告</Button>
-  <Button type="danger" icon="delete">删除</Button>
-</div>
+:::preview
 
-```vue
-<template>
-  <Button type="primary" icon="search">搜索</Button>
-  <Button icon="edit">编辑</Button>
-  <Button type="success" icon="check">确认</Button>
-  <Button type="warning" icon="exclamation-triangle">警告</Button>
-  <Button type="danger" icon="delete">删除</Button>
-</template>
+demo-preview=../demo/button/button-icon.vue
 
-<script setup>
-import Button from '@/components/Button/Button.vue'
-</script>
-```
-
+:::
 
 ## API
 

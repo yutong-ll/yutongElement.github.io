@@ -3,23 +3,22 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: "组件库"
+  # text: "A VitePress Site"
+  tagline: 基于 Vue 3，面向设计师和开发者的组件库
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 组件文档
+      link: /components/button
     - theme: alt
-      text: API Examples
+      text: 快速开始
       link: /api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 开发指南
+    details: 待补充
+  - title: 组件总览
+    details: 待补充
+  - title: 更新日志
+    details: 待补充
 ---
-

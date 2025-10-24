@@ -1,11 +1,22 @@
 import { defineConfig } from 'vitepress'
 import { resolve } from 'path'
+import {
+  containerPreview,
+  componentPreview,
+} from '@vitepress-demo-preview/plugin'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: "v-Element",
+  description: "A VitePress Site componentPreview,te",
   // 对于项目站点，base路径应为仓库名称
   base: '/yutongElement.github.io/',
+  markdown: {
+    config(md) {
+      md.use(containerPreview)
+      md.use(componentPreview)
+
+    },
+  },
   vite: {
     resolve: {
       alias: {
@@ -18,22 +29,28 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '组件文档', link: '/components/button' }
     ],
 
     sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      },
+      // {
+      //   text: 'Examples',
+      //   items: [
+      //     { text: 'Markdown Examples', link: '/markdown-examples' },
+      //     { text: 'Runtime API Examples', link: '/api-examples' }
+      //   ]
+      // },
       {
         text: 'Components',
         items: [
           { text: 'Button', link: '/components/button' },
           { text: 'Tooltip', link: '/components/tooltip' },
+          { text: 'Icon', link: '/components/icon' },
+          { text: 'Collapse', link: '/components/collapse' },
+          { text: 'Input', link: '/components/message' },
+          { text: 'Select', link: '/components/select' },
+          { text: 'Message', link: '/components/message' },
+
         ]
       },
     ],
